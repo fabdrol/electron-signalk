@@ -44,39 +44,46 @@
       li
         display block
         width 100%
-        height 50px
-        line-height 50px
+        height 60px
         border-bottom 1px solid #eee
 
         strong, em
           margin 0 5%
+          display block
 
-        &.metric
-          padding 10px
-          line-height 2 !important
-          font-size 0.9em
+        &.layout
+          em
+            line-height 5px
+            height 20px
+            font-size 0.8em
 
-        &.layout strong
-           line-height 50px
-           height 50px
+          strong
+             line-height 45px
+             height 40px
 
-           i
-            margin-right 10px
+             i
+              margin-right 10px
+
+        &.disabled > *
+          opacity .5
 
         &:active, &.selected
           background-color #fafafa
 
-    &.dark
-      background-color #222
+        &.disabled:active
+          background-color #fff
 
-      .block-inner
-        background-color #111
+  &.dark
+    background-color #222
 
-      ul.servers li
-        border-bottom-color #666
+    .block-inner
+      background-color #111
 
-        strong, em
-          color #eee
+    ul.layouts li
+      border-bottom-color #666
 
-        &:active, &.selected
-          background-color #333
+      strong, em
+        color #eee
+
+      &:active, &.selected
+        background-color #333

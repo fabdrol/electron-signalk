@@ -1,5 +1,4 @@
 import React from 'react'
-import Combinatorics from 'js-combinatorics'
 import './styles.styl'
 
 export default class UIComponent extends React.Component {
@@ -19,8 +18,8 @@ export default class UIComponent extends React.Component {
     } = this.props
 
     let layout = null
-    let calculatedMetrics = null
 
+    /*
     const metrics = [
       'Kompas',
       'COG',
@@ -30,30 +29,7 @@ export default class UIComponent extends React.Component {
       'Positie',
       'Watertemperatuur'
     ]
-
-    if (this.state.layout !== null) {
-      switch (this.state.layout) {
-        case 'single':
-          calculatedMetrics = metrics.map((metric, index) => (
-            <li key={index} className='metric'>{metric}</li>
-          ))
-          break
-
-        case 'double_vertical':
-        case 'double_horizontal':
-        case 'quattro':
-        case 'six':
-          let num = 2
-          num = this.state.layout === 'quattro' ? 4 : num
-          num = this.state.layout === 'six' ? 6 : num
-          calculatedMetrics = Combinatorics.combination(metrics, num).toArray().map((metric, index) => (
-            <li key={index} className='metric'>{metric.join(', ')}</li>
-          ))
-          break
-      }
-
-      console.log('calculatedMetrics', calculatedMetrics)
-    }
+    // */
 
     if (this.state.metrics.length === 0) {
       layout = (
@@ -63,20 +39,29 @@ export default class UIComponent extends React.Component {
               <div className='block'>
                 <div className='block-inner'>
                   <ul className='layouts'>
-                    <li className='layout' onClick={() => this.setState({ layout: 'six' })}>
+                    <li className='layout' onClick={() => this.setState({ layout: 'six', metrics: ['headingTrue', 'speedThroughWater', 'depthBelowTransducer', 'courseOverGround', 'speedOverGround', 'position'] })}>
                       <strong><i className='fa fa-th' /> Overzicht 6x</strong>
+                      <em>Kompas, COG, SOG, STW, diepgang, positie</em>
                     </li>
-                    <li className='layout' onClick={() => this.setState({ layout: 'quattro' })}>
-                      <strong><i className='fa fa-th-large' /> Overzicht 4x</strong>
+                    <li className='layout' onClick={() => this.setState({ layout: 'quattro', metrics: ['headingTrue', 'depthBelowTransducer', 'speedThroughWater', 'speedOverGround'] })}>
+                      <strong><i className='fa fa-th-large' /> Overzicht 4x (navigatie)</strong>
+                      <em>Kompas, diepgang, STW, SOG</em>
                     </li>
-                    <li className='layout' onClick={() => this.setState({ layout: 'double_vertical' })}>
-                      <strong><i className='fa fa-pause' /> Verticaal</strong>
+                    <li className='layout' onClick={() => this.setState({ layout: 'double_vertical', metrics: ['headingTrue', 'courseOverGround'] })}>
+                      <strong><i className='fa fa-pause' /> Koers 2x</strong>
+                      <em>Kompas & COG</em>
                     </li>
-                    <li className='layout' onClick={() => this.setState({ layout: 'double_horizontal' })}>
-                      <strong><i className='fa fa-pause' style={{ transform: 'rotate(90deg)' }} /> Horizontaal</strong>
+                    <li className='layout' onClick={() => this.setState({ layout: 'double_vertical', metrics: ['speedThroughWater', 'speedOverGround'] })}>
+                      <strong><i className='fa fa-pause' /> Snelheid 2x</strong>
+                      <em>STW & SOG</em>
                     </li>
-                    <li className='layout' onClick={() => this.setState({ layout: 'single' })}>
-                      <strong><i className='fa fa-square' /> Enkel</strong>
+                    <li className='layout disabled'>
+                      <strong><i className='fa fa-th-large' /> Overzicht 4x (zeilen)</strong>
+                      <em>Kompas, wind, STW</em>
+                    </li>
+                    <li className='layout disabled'>
+                      <strong><i className='fa fa-pause' /> Wind</strong>
+                      <em>Wind snelheid & richting</em>
                     </li>
                   </ul>
                 </div>
@@ -86,7 +71,34 @@ export default class UIComponent extends React.Component {
               <div className='block'>
                 <div className='block-inner last'>
                   <ul className='layouts'>
-                    {calculatedMetrics}
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['depthBelowTransducer'] })}>
+                      <strong><i className='fa fa-wifi' /> Diepgang</strong>
+                      <em>Diepgang onder de meter</em>
+                    </li>
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['courseOverGround'] })}>
+                      <strong><i className='fa fa-compass' /> COG</strong>
+                      <em>Koers over de grond</em>
+                    </li>
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['headingTrue'] })}>
+                      <strong><i className='fa fa-compass' /> Kompas</strong>
+                      <em>Digitaal kompas</em>
+                    </li>
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['position'] })}>
+                      <strong><i className='fa fa-map-marker-alt' /> Positie</strong>
+                      <em>GPS</em>
+                    </li>
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['speedOverGround'] })}>
+                      <strong><i className='fa fa-tachometer-alt' /> SOG</strong>
+                      <em>Snelheid over de grond</em>
+                    </li>
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['speedThroughWater'] })}>
+                      <strong><i className='fa fa-tachometer-alt' /> STW</strong>
+                      <em>Snelheid door het water</em>
+                    </li>
+                    <li className='layout' onClick={() => this.setState({ layout: 'single', metrics: ['waterTemperature'] })}>
+                      <strong><i className='fa fa-thermometer-quarter' /> Watertemperatuur</strong>
+                      <em>Temperatuur onder de boot</em>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -102,7 +114,7 @@ export default class UIComponent extends React.Component {
           <div className='row'>
             <div className='col-12'>
               <div className='block'>
-                <div className='block-inner'>
+                <div className='block-inner middle'>
                   {this.state.metrics[0] || '<none>'}
                 </div>
               </div>
