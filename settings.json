@@ -1,0 +1,23 @@
+{
+  "window": {
+    "width": 800,
+    "height": 480,
+    "frame": true,
+    "fullscreen": true,
+    "kiosk": false,
+    "backgroundColor": "#ffffff"
+  },
+  "servers": [
+    {
+      "default": true,
+      "name": "Decipher HQ",
+      "host": "95.97.138.90",
+      "port": 3000
+    },
+    {
+      "name": "X-Miles",
+      "host": "192.168.0.100",
+      "port": 3000
+    }
+  ]
+}

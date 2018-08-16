@@ -1,0 +1,62 @@
+_size = 80px
+_height = _size * 0.7
+
+aside.sidebar
+  position fixed
+  width _size
+  height 100%
+  background-color white
+
+  .button
+    display block
+    width _size
+    height _size
+    line-height _size
+    text-align center
+    padding 0
+    overflow hidden
+
+    &.nav
+      height _height * 1.2
+      line-height _height * 1.2
+
+      &.first
+        margin-top _height * 1.1
+
+      > .fa
+        font-size 1.5em
+        color #999
+
+      &.active > .fa
+        color #222
+
+    &.brand
+      height _height
+      line-height _height
+
+      img
+        display inline-block
+        width _height
+        height auto
+
+    &.button-bottom
+      position absolute
+      bottom -19px
+      left 0
+      border-top 1px solid #eee
+
+  &.dark
+    background-color #111
+
+    .nav
+      > .fa
+        color #444
+
+      &.active > .fa
+        color #ccc
+
+    .brand > img
+      opacity 0.5
+
+    .button-bottom
+      border-top-color #333

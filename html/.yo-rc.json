@@ -1,0 +1,9 @@
+{
+  "generator-react-webpack": {
+    "appName": "ui-settings",
+    "style": "stylus",
+    "cssmodules": true,
+    "postcss": true,
+    "generatedWithVersion": 4
+  }
+}
