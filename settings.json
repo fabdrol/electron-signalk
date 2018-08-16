@@ -2,7 +2,6 @@
   "window": {
     "width": 800,
     "height": 480,
-    "frame": true,
     "fullscreen": true,
     "kiosk": false,
     "backgroundColor": "#ffffff"
