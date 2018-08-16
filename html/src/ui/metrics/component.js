@@ -1,4 +1,5 @@
 import React from 'react'
+import Metric from '../_metric'
 import './styles.styl'
 
 export default class UIComponent extends React.Component {
@@ -115,7 +116,7 @@ export default class UIComponent extends React.Component {
             <div className='col-12'>
               <div className='block'>
                 <div className='block-inner middle'>
-                  {this.state.metrics[0] || '<none>'}
+                  <Metric name={this.state.metrics[0]} size='full' />
                 </div>
               </div>
             </div>
@@ -131,14 +132,14 @@ export default class UIComponent extends React.Component {
             <div className='col-6'>
               <div className='block'>
                 <div className='block-inner'>
-                  {this.state.metrics[0] || '<none>'}
+                  <Metric name={this.state.metrics[0]} size='half' />
                 </div>
               </div>
             </div>
             <div className='col-6'>
               <div className='block'>
                 <div className='block-inner last'>
-                  {this.state.metrics[1] || '<none>'}
+                  <Metric name={this.state.metrics[1]} size='half' />
                 </div>
               </div>
             </div>
@@ -147,30 +148,30 @@ export default class UIComponent extends React.Component {
       )
     }
 
-    if (this.state.layout === 'double_horizontal' && this.state.metrics.length === 2) {
-      layout = (
-        <div className='container-fluid'>
-          <div className='row' style={{ height: '50%' }}>
-            <div className='col-12'>
-              <div className='block'>
-                <div className='block-inner middle'>
-                  {this.state.metrics[0] || '<none>'}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='row' style={{ height: '50%' }}>
-            <div className='col-12'>
-              <div className='block'>
-                <div className='block-inner middle bottom'>
-                  {this.state.metrics[1] || '<none>'}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    }
+    // if (this.state.layout === 'double_horizontal' && this.state.metrics.length === 2) {
+    //   layout = (
+    //     <div className='container-fluid'>
+    //       <div className='row' style={{ height: '50%' }}>
+    //         <div className='col-12'>
+    //           <div className='block'>
+    //             <div className='block-inner middle'>
+    //               {this.state.metrics[0] || '<none>'}
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //       <div className='row' style={{ height: '50%' }}>
+    //         <div className='col-12'>
+    //           <div className='block'>
+    //             <div className='block-inner middle bottom'>
+    //               {this.state.metrics[1] || '<none>'}
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   )
+    // }
 
     if (this.state.layout === 'quattro' && this.state.metrics.length === 4) {
       layout = (
@@ -179,14 +180,14 @@ export default class UIComponent extends React.Component {
             <div className='col-6'>
               <div className='block'>
                 <div className='block-inner'>
-                  {this.state.metrics[0] || '<none>'}
+                  <Metric name={this.state.metrics[0]} size='medium' />
                 </div>
               </div>
             </div>
             <div className='col-6'>
               <div className='block'>
                 <div className='block-inner last'>
-                  {this.state.metrics[1] || '<none>'}
+                  <Metric name={this.state.metrics[1]} size='medium' />
                 </div>
               </div>
             </div>
@@ -195,14 +196,14 @@ export default class UIComponent extends React.Component {
             <div className='col-6'>
               <div className='block'>
                 <div className='block-inner bottom'>
-                  {this.state.metrics[2] || '<none>'}
+                  <Metric name={this.state.metrics[2]} size='medium' />
                 </div>
               </div>
             </div>
             <div className='col-6'>
               <div className='block'>
                 <div className='block-inner last bottom'>
-                  {this.state.metrics[3] || '<none>'}
+                  <Metric name={this.state.metrics[3]} size='medium' />
                 </div>
               </div>
             </div>
@@ -218,21 +219,21 @@ export default class UIComponent extends React.Component {
             <div className='col-4'>
               <div className='block'>
                 <div className='block-inner'>
-                  {this.state.metrics[0] || '<none>'}
+                  <Metric name={this.state.metrics[0]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
               <div className='block'>
                 <div className='block-inner' style={{ marginLeft: 0 }}>
-                  {this.state.metrics[1] || '<none>'}
+                  <Metric name={this.state.metrics[1]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
               <div className='block'>
                 <div className='block-inner last'>
-                  {this.state.metrics[2] || '<none>'}
+                  <Metric name={this.state.metrics[2]} size='small' />
                 </div>
               </div>
             </div>
@@ -241,21 +242,21 @@ export default class UIComponent extends React.Component {
             <div className='col-4'>
               <div className='block'>
                 <div className='block-inner bottom'>
-                  {this.state.metrics[3] || '<none>'}
+                  <Metric name={this.state.metrics[3]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
               <div className='block'>
                 <div className='block-inner bottom' style={{ marginLeft: 0 }}>
-                  {this.state.metrics[4] || '<none>'}
+                  <Metric name={this.state.metrics[4]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
               <div className='block'>
                 <div className='block-inner last bottom'>
-                  {this.state.metrics[5] || '<none>'}
+                  <Metric name={this.state.metrics[5]} size='small' />
                 </div>
               </div>
             </div>
