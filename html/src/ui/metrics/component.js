@@ -114,7 +114,7 @@ export default class UIComponent extends React.Component {
         <div className='container-fluid'>
           <div className='row'>
             <div className='col-12'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner middle'>
                   <Metric name={this.state.metrics[0]} size='full' />
                 </div>
@@ -130,14 +130,14 @@ export default class UIComponent extends React.Component {
         <div className='container-fluid'>
           <div className='row'>
             <div className='col-6'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner'>
                   <Metric name={this.state.metrics[0]} size='half' />
                 </div>
               </div>
             </div>
             <div className='col-6'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner last'>
                   <Metric name={this.state.metrics[1]} size='half' />
                 </div>
@@ -178,14 +178,14 @@ export default class UIComponent extends React.Component {
         <div className='container-fluid'>
           <div className='row' style={{ height: '50%' }}>
             <div className='col-6'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner'>
                   <Metric name={this.state.metrics[0]} size='medium' />
                 </div>
               </div>
             </div>
             <div className='col-6'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner last'>
                   <Metric name={this.state.metrics[1]} size='medium' />
                 </div>
@@ -194,14 +194,14 @@ export default class UIComponent extends React.Component {
           </div>
           <div className='row' style={{ height: '50%' }}>
             <div className='col-6'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner bottom'>
                   <Metric name={this.state.metrics[2]} size='medium' />
                 </div>
               </div>
             </div>
             <div className='col-6'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner last bottom'>
                   <Metric name={this.state.metrics[3]} size='medium' />
                 </div>
@@ -217,21 +217,21 @@ export default class UIComponent extends React.Component {
         <div className='container-fluid'>
           <div className='row' style={{ height: '50%' }}>
             <div className='col-4'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner'>
                   <Metric name={this.state.metrics[0]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner' style={{ marginLeft: 0 }}>
                   <Metric name={this.state.metrics[1]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner last'>
                   <Metric name={this.state.metrics[2]} size='small' />
                 </div>
@@ -240,21 +240,21 @@ export default class UIComponent extends React.Component {
           </div>
           <div className='row' style={{ height: '50%' }}>
             <div className='col-4'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner bottom'>
                   <Metric name={this.state.metrics[3]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner bottom' style={{ marginLeft: 0 }}>
                   <Metric name={this.state.metrics[4]} size='small' />
                 </div>
               </div>
             </div>
             <div className='col-4'>
-              <div className='block'>
+              <div className='block' style={{ overflow: 'hidden' }}>
                 <div className='block-inner last bottom'>
                   <Metric name={this.state.metrics[5]} size='small' />
                 </div>
