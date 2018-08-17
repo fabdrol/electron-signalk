@@ -5,9 +5,20 @@ import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import App from './ui/app'
 import configureStore from './store'
+import SKConnection from './lib/signalk'
+
+Object.isObject = function isObject (mixed, ownProp) {
+  if (ownProp) {
+    return mixed && typeof mixed === 'object' && mixed.hasOwnProperty(ownProp)
+  }
+
+  return mixed && typeof mixed === 'object'
+}
 
 const history = createHistory()
 const store = configureStore(history)
+// Initiate SK client...
+store.skClient = new SKConnection(store)
 
 ReactDOM.render(
   <AppContainer>
