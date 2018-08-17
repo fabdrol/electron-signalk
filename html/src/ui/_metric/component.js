@@ -31,7 +31,7 @@ const labels = {
     label: 'Positie'
   },
   waterTemperature: {
-    label: 'Koers over grond',
+    label: 'Watertemperatuur',
     units: '°C',
     post: ''
   }
