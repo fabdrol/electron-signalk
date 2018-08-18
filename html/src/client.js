@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import App from './ui/app'
 import configureStore from './store'
 import SKConnection from './lib/signalk'
+import { hydrateUserSettings } from './ducks/signalk'
+import { hydrateThemeSettings } from './ducks/ui'
 
 Object.isObject = function isObject (mixed, ownProp) {
   if (ownProp) {
@@ -17,7 +19,10 @@ Object.isObject = function isObject (mixed, ownProp) {
 
 const history = createHistory()
 const store = configureStore(history)
-// Initiate SK client...
+
+// Hydrate settings from localStorage, then init SK client
+store.dispatch(hydrateUserSettings())
+store.dispatch(hydrateThemeSettings())
 store.skClient = new SKConnection(store)
 
 ReactDOM.render(

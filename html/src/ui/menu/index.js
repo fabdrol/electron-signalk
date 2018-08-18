@@ -1,13 +1,14 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Component from './component'
-import { push } from 'react-router-redux'
+import { replace } from 'react-router-redux'
 
 import {
   setNight,
   setTheme,
   toggleNight,
-  toggleTheme
+  toggleTheme,
+  setShouldReset
 } from '../../ducks/ui'
 
 function mapStateToProps (state, ownProps) {
@@ -25,7 +26,8 @@ function mapDispatchToProps (dispatch) {
     setTheme,
     toggleNight,
     toggleTheme,
-    push
+    setShouldReset,
+    replace
   }, dispatch)
 }
 

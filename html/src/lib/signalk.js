@@ -14,6 +14,7 @@ class SKConnection extends EventEmitter {
     this.store = store
     this.client = null
     this.connected = false
+    this.reconnects = 0
 
     this.config = {
       useTLS: false,
@@ -28,6 +29,8 @@ class SKConnection extends EventEmitter {
   }
 
   connect (hostname, port) {
+    this.reconnects += 1
+
     if (this.client !== null) {
       return this.client
         .disconnect(true)
@@ -36,9 +39,9 @@ class SKConnection extends EventEmitter {
           return this._connect(hostname, port)
         })
         .catch(err => {
-          console.error(`Error whilst disconnecting from SK server, force-killing client: ${err.message || err}`)
-          this.client = null
-          return this._connect(hostname, port)
+          console.error(`Error whilst disconnecting from SK server, force-killing client`, err)
+          // this.client = null
+          // return this._connect(hostname, port)
         })
     }
 
@@ -78,14 +81,7 @@ class SKConnection extends EventEmitter {
     this.client.on('hitMaxRetries', this._onMaxRetries.bind(this))
     this.client.on('delta', this._onDelta.bind(this))
 
-    return this.client
-      .connect()
-      .then(() => this.client)
-      .catch(err => {
-        this.emit('error', err)
-        this.client = null
-        throw err
-      })
+    return this.client.connect()
   }
 
   _storeChanged () {
@@ -96,44 +92,60 @@ class SKConnection extends EventEmitter {
     }
   }
 
+  _sleep (time, val) {
+    return new Promise(resolve => {
+      setTimeout(() => resolve(val), time)
+    })
+  }
+
   /*
    * EVENT HANDLERS
    */
   _onDelta (delta) {
+    // console.log('Got delta')
     this.emit('delta', delta)
     this.store.dispatch(applyDelta(delta))
   }
 
   _onConnect (evt) {
-    this.connected = true
-    this.store.dispatch(setConnected(this.connected))
+    if (this.client === null) {
+      console.log('Connected, but client = null')
+      return
+    }
 
     this.client
       .API()
       .then(api => api.self())
       .then(state => {
+        // console.log('Connected, subscribing')
+        this.connected = true
+        this.store.dispatch(setConnected(this.connected))
         this.store.dispatch(hydrateState(state))
-        this.subscribe()
         this.emit('connect', evt)
+        return this._sleep(250)
       })
+      .then(() => this.subscribe())
       .catch(err => {
         console.log('ERROR', err.message)
       })
   }
 
   _onDisconnect (evt) {
+    console.log('Disconnected', evt)
     this.connected = false
     this.store.dispatch(setConnected(this.connected))
     this.emit('disconnect', evt)
   }
 
   _onError (evt) {
+    console.log('Error', evt)
     this.connected = false
     this.store.dispatch(setConnected(this.connected))
     this.emit('error', evt)
   }
 
   _onMaxRetries (evt) {
+    console.log('Hit max retries')
     this.connected = false
     this.store.dispatch(setConnected(this.connected))
     this.emit('hitMaxRetries', evt)

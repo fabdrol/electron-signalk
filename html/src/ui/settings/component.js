@@ -30,6 +30,11 @@ export default class UIComponent extends React.Component {
     })
   }
 
+  selectServer (id) {
+    this.props.selectServer(id)
+    setTimeout(() => window.location.reload(), 500)
+  }
+
   render () {
     const {
       theme,
@@ -79,7 +84,7 @@ export default class UIComponent extends React.Component {
                 <div className='block-inner'>
                   <ul className='servers'>
                     {servers.map(server => (
-                      <li key={server.id} onClick={() => this.props.selectServer(server.id)} className={(hostname === server.hostname && port === server.port) ? 'selected' : ''}>
+                      <li key={server.id} onClick={() => this.selectServer(server.id)} className={(hostname === server.hostname && port === server.port) ? 'selected' : ''}>
                         <strong>{server.name}</strong>
                         <em>{server.hostname}:{server.port} {(connected === true && hostname === server.hostname && port === server.port) ? (<span><i className='fa fa-plug' /></span>) : ''}</em>
                       </li>

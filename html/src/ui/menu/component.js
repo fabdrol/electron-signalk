@@ -4,12 +4,17 @@ import 'react-toggle/style.css'
 import './styles.styl'
 
 export default class UIComponent extends React.Component {
+  gotoMetrics () {
+    this.props.setShouldReset(true)
+    this.props.replace('/')
+  }
+
   render () {
     const {
       night,
       theme,
       path,
-      push
+      replace
     } = this.props
 
     const classes = [ 'sidebar', theme ]
@@ -24,22 +29,22 @@ export default class UIComponent extends React.Component {
           <img src='/static/x99.png' />
         </div>
 
-        <a className={[ 'button', 'nav', 'first', (path === '/' ? 'active' : '') ].join(' ')} onClick={() => push('/')}>
+        <a className={[ 'button', 'nav', 'first', (path === '/' ? 'active' : '') ].join(' ')} onClick={() => this.gotoMetrics()}>
           <i className='fa fa-tachometer-alt' />
         </a>
 
-        <a className={[ 'button', 'nav', (path === '/controls' ? 'active' : '') ].join(' ')} onClick={() => push('/controls')}>
+        <a className={[ 'button', 'nav', (path === '/controls' ? 'active' : '') ].join(' ')} onClick={() => replace('/controls')}>
           <i className='fa fa-toggle-on' />
         </a>
 
-        <a className={[ 'button', 'nav', (path === '/settings' ? 'active' : '') ].join(' ')} onClick={() => push('/settings')}>
+        <a className={[ 'button', 'nav', (path === '/settings' ? 'active' : '') ].join(' ')} onClick={() => replace('/settings')}>
           <i className='fa fa-cogs' />
         </a>
 
         <label className='button button-bottom'>
           <ReactToggle
-            defaultChecked={theme === 'dark'}
-            onChange={evt => this.props.setTheme(evt.target.checked ? 'dark' : 'light')}
+            defaultChecked={theme === 'light'}
+            onChange={evt => this.props.setTheme(evt.target.checked ? 'light' : 'dark')}
           />
         </label>
       </aside>

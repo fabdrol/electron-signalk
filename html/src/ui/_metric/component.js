@@ -3,6 +3,10 @@ import utils from '@signalk/nmea0183-utilities'
 import './styles.styl'
 
 function ddToDms (deg, lng) {
+  if (deg === null) {
+    return '--'
+  }
+
   let dir = ''
   let d = parseInt(deg, 10)
   const minfloat = Math.abs((deg - d) * 60)
@@ -26,7 +30,7 @@ function ddToDms (deg, lng) {
     dir = deg < 0 ? 'E' : 'N'
   }
 
-  return `${d}° ${m}' ${secfloat.toFixed(3)}" ${dir}`
+  return `${d}° ${m}' ${secfloat.toFixed(1)}" ${dir}`
 }
 
 export default class UIComponent extends React.Component {
@@ -62,8 +66,8 @@ export default class UIComponent extends React.Component {
 
       return (
         <div className={['metric', 'position', size, theme].join(' ')}>
-          <h1>{ddToDms(latitude !== null ? latitude : 0)}</h1>
-          <h1>{ddToDms(longitude !== null ? longitude : 0)}</h1>
+          <h1>{ddToDms(latitude)}</h1>
+          <h1>{ddToDms(longitude)}</h1>
 
           <div className='meta'>
             <h2 className='left'>{labels.label}</h2>
@@ -72,6 +76,7 @@ export default class UIComponent extends React.Component {
       )
     }
 
+    let title = <h1>--</h1>
     let value = Object.keys(values).length === 1 ? values[Object.keys(values)[0]] : '--'
 
     if (convert && typeof value === 'number' && !isNaN(value)) {
@@ -82,9 +87,17 @@ export default class UIComponent extends React.Component {
       value = value.toFixed(1)
     }
 
+    if (!value || value === '') {
+      value = '--'
+    }
+
+    if (value !== '--') {
+      title = <h1>{value}{labels.post}</h1>
+    }
+
     return (
       <div className={['metric', size, theme].join(' ')}>
-        <h1>{value}{labels.post}</h1>
+        {title}
         <div className='meta'>
           <h2 className='left'>{labels.label}</h2>
           <h2 className='right'>{labels.units}</h2>
