@@ -16,7 +16,8 @@ function mapStateToProps (state, ownProps) {
     ...ownProps,
     night: state.ui.night,
     theme: state.ui.theme,
-    path: state.router.location.pathname
+    path: state.router.location.pathname,
+    router: state.router
   }
 }
 

@@ -5,7 +5,7 @@ import './styles.styl'
 
 export default class UIComponent extends React.Component {
   gotoMetrics () {
-    this.props.setShouldReset(true)
+    this.props.setShouldReset(this.props.path === '/')
     this.props.replace('/')
   }
 

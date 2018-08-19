@@ -50,6 +50,25 @@ export default class UIComponent extends React.Component {
   }
 
   componentWillUpdate (newProps) {
+    let lastLayout = STORE.getItem(`${PREFIX}/layout`)
+    let lastMetrics = STORE.getItem(`${PREFIX}/metrics`)
+
+    if (typeof lastMetrics === 'string') {
+      try {
+        lastMetrics = JSON.parse(lastMetrics)
+      } catch (e) {
+        lastMetrics = null
+      }
+    }
+
+    if (!this.validLayouts.includes(lastLayout)) {
+      lastLayout = null
+    }
+
+    if (!Array.isArray(lastMetrics) || lastMetrics.length === 0) {
+      lastMetrics = null
+    }
+
     if (newProps.shouldReset === true) {
       this.props.setShouldReset(false)
       this.setState({

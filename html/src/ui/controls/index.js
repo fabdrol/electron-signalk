@@ -6,7 +6,11 @@ function mapStateToProps (state, ownProps) { // eslint-disable-line no-unused-va
   return {
     ...ownProps,
     theme: state.ui.theme,
-    night: state.ui.night
+    night: state.ui.night,
+    signalk: Object.keys(state.signalk.data).filter(key => key.includes('electrical')).reduce((obj, key) => {
+      obj[key] = state.signalk.data[key]
+      return obj
+    }, {})
   }
 }
 
