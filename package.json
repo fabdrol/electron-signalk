@@ -1,5 +1,6 @@
 {
   "name": "electron-signalk",
+  "productName": "signalk",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -10,7 +11,8 @@
   "author": "Fabian Tollenaar <fabian@decipher.industries> (https://decipher.industries)",
   "license": "UNLICENSED",
   "devDependencies": {
-    "electron": "^2.0.7"
+    "electron": "^2.0.7",
+    "electron-packager": "^12.1.2"
   },
   "dependencies": {
     "express": "^4.16.3"
