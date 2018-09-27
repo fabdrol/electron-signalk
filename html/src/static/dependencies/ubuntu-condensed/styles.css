@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Ubuntu Condensed';
+    src: url('UbuntuCondensed-Regular.eot');
+    src: local('Ubuntu Condensed'), local('UbuntuCondensed-Regular'),
+        url('UbuntuCondensed-Regular.eot?#iefix') format('embedded-opentype'),
+        url('UbuntuCondensed-Regular.woff2') format('woff2'),
+        url('UbuntuCondensed-Regular.woff') format('woff'),
+        url('UbuntuCondensed-Regular.ttf') format('truetype'),
+        url('UbuntuCondensed-Regular.svg#UbuntuCondensed-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+

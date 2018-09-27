@@ -1,3 +1,13 @@
+/**
+ * component.js
+ *
+ * @author:          Fabian Tollenaar <fabian> <fabian@decipher.industries>
+ * @date:            2018-08-16 17:24
+ * @copyright:       Fabian Tollenaar/Decipher Industries (c) 2018. All rights reserved.
+ * @license:         UNLICENSED
+ * @modified:        2018-09-27 17:36
+ */
+
 import React from 'react'
 import utils from '@signalk/nmea0183-utilities'
 import './styles.styl'

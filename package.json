@@ -1,11 +1,19 @@
 {
   "name": "electron-signalk",
-  "productName": "signalk",
-  "version": "1.0.0",
-  "description": "",
+  "productName": "Signal K",
+  "version": "1.0.5",
+  "description": "Signal K electron app for X-Miles",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "cd html && npm install . && cd node_modules/@signalk/signalk-sdk && npm run dist && cd ../../.. && npm run dist && cd ..",
+    "darwin": "electron-packager . signalk --overwrite --platform=darwin --arch=x64 --icon=icons/mac/icon.icns --prune --out=releases",
+    "win32": "electron-packager . signalk --overwrite --asar --platform=win32 --arch=ia32 --icon=icons/win/icon.ico --prune --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Signal K\"",
+    "win64": "electron-packager . signalk --overwrite --asar --platform=win32 --arch=x64 --icon=icons/win/icon.ico --prune --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Signal K\"",
+    "linux64": "electron-packager . signalk --overwrite --asar --platform=linux --arch=x64 --icon=icons/png/1024x1024.png --prune --out=releases",
+    "linux32": "electron-packager . signalk --overwrite --asar --platform=linux --arch=ia32 --icon=icons/png/1024x1024.png --prune --out=releases",
+    "linux-armv7l": "electron-packager . signalk --overwrite --asar --platform=linux --arch=armv7l --icon=icons/png/1024x1024.png --prune --out=releases",
+    "package": "npm run build && npm run linux-armv7l && npm run linux64 4 && npm run darwin"
   },
   "keywords": [],
   "author": "Fabian Tollenaar <fabian@decipher.industries> (https://decipher.industries)",
