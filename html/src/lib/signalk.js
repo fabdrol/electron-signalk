@@ -1,5 +1,16 @@
+/**
+ * signalk.js
+ *
+ * @author:          Fabian Tollenaar <fabian> <fabian@decipher.industries>
+ * @date:            2018-08-17 12:00
+ * @copyright:       Fabian Tollenaar/Decipher Industries (c) 2018. All rights reserved.
+ * @license:         UNLICENSED
+ * @modified:        2018-09-28 15:02
+ */
+
 import EventEmitter from 'eventemitter3'
 import Client from '@signalk/signalk-sdk'
+import fetch from 'cross-fetch'
 
 import {
   setConnected,
@@ -15,6 +26,7 @@ class SKConnection extends EventEmitter {
     this.client = null
     this.connected = false
     this.reconnects = 0
+    this.layoutInfoTimeout = null
 
     this.config = {
       useTLS: false,
@@ -28,8 +40,42 @@ class SKConnection extends EventEmitter {
     this._storeChanged()
   }
 
+  fetchLayoutInfo () {
+    if (this.layoutInfoTimeout !== null) {
+      clearTimeout(this.layoutInfoTimeout)
+    }
+
+    const state = this.store.getState()
+    const { identity } = state.ui
+    const { hostname, port } = state.signalk
+
+    fetch(`http://${hostname}:${port}/_essense-instrument/api/v1/state/${identity}`)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+
+        return null
+      })
+      .then(response => {
+        if (response !== null) {
+          this.emit('layout', response)
+        }
+
+        this.layoutInfoTimeout = setTimeout(() => this.fetchLayoutInfo(), 10000)
+      })
+      .catch(err => {
+        console.error(`Unable to fetch layout: ${err.message}`)
+        this.layoutInfoTimeout = setTimeout(() => this.fetchLayoutInfo(), 10000)
+      })
+  }
+
   connect (hostname, port) {
     this.reconnects += 1
+
+    if (this.layoutInfoTimeout !== null) {
+      clearTimeout(this.layoutInfoTimeout)
+    }
 
     if (this.client !== null) {
       return this.client
@@ -81,6 +127,10 @@ class SKConnection extends EventEmitter {
     this.client.on('hitMaxRetries', this._onMaxRetries.bind(this))
     this.client.on('delta', this._onDelta.bind(this))
 
+    if (this.layoutInfoTimeout !== null) {
+      clearTimeout(this.layoutInfoTimeout)
+    }
+
     return this.client.connect()
   }
 
@@ -117,6 +167,7 @@ class SKConnection extends EventEmitter {
       .API()
       .then(api => api.self())
       .then(state => {
+        this.fetchLayoutInfo()
         // console.log('Connected, subscribing')
         this.connected = true
         this.store.dispatch(setConnected(this.connected))

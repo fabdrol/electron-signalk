@@ -1,15 +1,24 @@
+/**
+ * component.js
+ *
+ * @author:          Fabian Tollenaar <fabian> <fabian@decipher.industries>
+ * @date:            2018-08-15 21:15
+ * @copyright:       Fabian Tollenaar/Decipher Industries (c) 2018. All rights reserved.
+ * @license:         UNLICENSED
+ * @modified:        2018-09-28 15:12
+ */
+
 import React from 'react'
 import Metric from '../_metric'
 import './styles.styl'
-import { STORE, PREFIX } from '../../common'
 
 export default class UIComponent extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      layout: null,
-      metrics: []
+      layout: props.layout,
+      metrics: props.metrics
     }
 
     this.validLayouts = [
@@ -20,68 +29,30 @@ export default class UIComponent extends React.Component {
     ]
   }
 
-  componentDidMount () {
-    let lastLayout = STORE.getItem(`${PREFIX}/layout`)
-    let lastMetrics = STORE.getItem(`${PREFIX}/metrics`)
-
-    if (typeof lastMetrics === 'string') {
-      try {
-        lastMetrics = JSON.parse(lastMetrics)
-      } catch (e) {
-        lastMetrics = null
-      }
-    }
-
-    if (!this.validLayouts.includes(lastLayout)) {
-      lastLayout = null
-    }
-
-    if (!Array.isArray(lastMetrics) || lastMetrics.length === 0) {
-      lastMetrics = null
-    }
-
-    if (!window.hasOwnProperty('_metricsComponentMounted') && lastMetrics !== null && lastLayout !== null) {
-      window._metricsComponentMounted = true
-      this.setState({
-        layout: lastLayout,
-        metrics: lastMetrics
-      })
-    }
-  }
-
   componentWillUpdate (newProps) {
-    let lastLayout = STORE.getItem(`${PREFIX}/layout`)
-    let lastMetrics = STORE.getItem(`${PREFIX}/metrics`)
-
-    if (typeof lastMetrics === 'string') {
-      try {
-        lastMetrics = JSON.parse(lastMetrics)
-      } catch (e) {
-        lastMetrics = null
-      }
+    if (newProps.layout === this.state.layout && newProps.metrics === this.state.metrics) {
+      return
     }
 
-    if (!this.validLayouts.includes(lastLayout)) {
-      lastLayout = null
+    let nextLayout = newProps.layout
+    let nextMetrics = newProps.metrics
+
+    if (!this.validLayouts.includes(nextLayout)) {
+      nextLayout = null
     }
 
-    if (!Array.isArray(lastMetrics) || lastMetrics.length === 0) {
-      lastMetrics = null
+    if (!Array.isArray(nextMetrics) || nextMetrics.length === 0) {
+      nextMetrics = null
     }
 
-    if (newProps.shouldReset === true) {
-      this.props.setShouldReset(false)
-      this.setState({
-        layout: null,
-        metrics: []
-      })
-    }
+    this.setState({
+      layout: nextLayout,
+      metrics: nextMetrics
+    })
   }
 
   setLayout (conf) {
-    STORE.setItem(`${PREFIX}/layout`, conf.layout)
-    STORE.setItem(`${PREFIX}/metrics`, JSON.stringify(conf.metrics))
-    this.setState(conf)
+
   }
 
   render () {
@@ -92,19 +63,7 @@ export default class UIComponent extends React.Component {
 
     let layout = null
 
-    /*
-    const metrics = [
-      'Kompas',
-      'COG',
-      'STW',
-      'SOG',
-      'Diepgang',
-      'Positie',
-      'Watertemperatuur'
-    ]
-    // */
-
-    if (this.state.metrics.length === 0) {
+    if (this.state.layout === null || this.state.metrics === null || this.state.metrics.length === 0) {
       layout = (
         <div className='container-fluid'>
           <div className='row'>

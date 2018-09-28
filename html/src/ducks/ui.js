@@ -1,17 +1,45 @@
+/**
+ * ui.js
+ *
+ * @author:          Fabian Tollenaar <fabian> <fabian@decipher.industries>
+ * @date:            2018-08-15 21:15
+ * @copyright:       Fabian Tollenaar/Decipher Industries (c) 2018. All rights reserved.
+ * @license:         UNLICENSED
+ * @modified:        2018-09-28 15:10
+ */
+
 import { PREFIX, STORE } from '../common'
 
 export const SET_THEME = 'industries.decipher.signalk/ui/SET_THEME'
 export const SET_NIGHT = 'industries.decipher.signalk/ui/SET_NIGHT'
 export const SET_SHOULD_RESET = 'industries.decipher.signalk/ui/SET_SHOULD_RESET'
+export const SET_LAYOUT = 'industries.decipher.signalk/ui/SET_LAYOUT'
+export const SET_IDENTITY = 'industries.decipher.signalk/ui/SET_IDENTITY'
 
 export const defaultState = {
   theme: 'dark',
   night: false,
-  shouldReset: false
+  shouldReset: false,
+  identity: 'center',
+  layout: null,
+  metrics: []
 }
 
 export default function reducer (state = defaultState, action = {}) {
   switch (action.type) {
+    case SET_IDENTITY:
+      return {
+        ...state,
+        identity: action.payload
+      }
+
+    case SET_LAYOUT:
+      return {
+        ...state,
+        layout: action.payload.layout,
+        metrics: action.payload.metrics
+      }
+
     case SET_THEME:
       STORE.setItem(`${PREFIX}/theme`, action.payload)
       return {
@@ -38,9 +66,30 @@ export default function reducer (state = defaultState, action = {}) {
   }
 }
 
-export function hydrateThemeSettings () {
+export function setLayout (layout, metrics) {
+  return {
+    type: SET_LAYOUT,
+    payload: {
+      layout,
+      metrics
+    }
+  }
+}
+
+export function hydrateThemeSettings (overrideTheme, overrideIdentity) {
   return (dispatch, getState) => {
     let theme = STORE.getItem(`${PREFIX}/theme`)
+
+    if (overrideTheme && (overrideTheme === 'light' || overrideTheme === 'dark')) {
+      theme = overrideTheme
+    }
+
+    if (typeof overrideIdentity === 'string' && overrideIdentity.trim() !== '') {
+      dispatch({
+        type: SET_IDENTITY,
+        payload: overrideIdentity
+      })
+    }
 
     if (typeof theme === 'string' && (theme === 'light' || theme === 'dark')) {
       return dispatch(setTheme(theme))

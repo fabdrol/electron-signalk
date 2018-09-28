@@ -1,3 +1,13 @@
+/**
+ * signalk.js
+ *
+ * @author:          Fabian Tollenaar <fabian> <fabian@decipher.industries>
+ * @date:            2018-08-16 11:45
+ * @copyright:       Fabian Tollenaar/Decipher Industries (c) 2018. All rights reserved.
+ * @license:         UNLICENSED
+ * @modified:        2018-09-28 14:29
+ */
+
 import SunCalc from 'suncalc'
 import moment from 'moment'
 import flatten from '../lib/flatten'
@@ -285,7 +295,7 @@ export function applyDelta (delta) {
   }
 }
 
-export function hydrateUserSettings () {
+export function hydrateUserSettings (overrideHost, overridePort) {
   let hostname = null
   let port = null
   let servers = null
@@ -302,6 +312,14 @@ export function hydrateUserSettings () {
     } catch (e) {
       servers = null
     }
+  }
+
+  if (overrideHost) {
+    hostname = overrideHost
+  }
+
+  if (overridePort) {
+    port = overridePort
   }
 
   return dispatch => {

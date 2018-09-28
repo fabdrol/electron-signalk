@@ -1,5 +1,14 @@
+/**
+ * component.js
+ *
+ * @author:          Fabian Tollenaar <fabian> <fabian@decipher.industries>
+ * @date:            2018-08-15 21:31
+ * @copyright:       Fabian Tollenaar/Decipher Industries (c) 2018. All rights reserved.
+ * @license:         UNLICENSED
+ * @modified:        2018-09-28 15:16
+ */
+
 import React from 'react'
-import ReactToggle from 'react-toggle'
 import 'react-toggle/style.css'
 import './styles.styl'
 
@@ -36,17 +45,6 @@ export default class UIComponent extends React.Component {
         <a className={[ 'button', 'nav', (path === '/controls' ? 'active' : '') ].join(' ')} onClick={() => replace('/controls')}>
           <i className='fa fa-toggle-on' />
         </a>
-
-        <a className={[ 'button', 'nav', (path === '/settings' ? 'active' : '') ].join(' ')} onClick={() => replace('/settings')}>
-          <i className='fa fa-cogs' />
-        </a>
-
-        <label className='button button-bottom'>
-          <ReactToggle
-            defaultChecked={theme === 'light'}
-            onChange={evt => this.props.setTheme(evt.target.checked ? 'light' : 'dark')}
-          />
-        </label>
       </aside>
     )
   }
