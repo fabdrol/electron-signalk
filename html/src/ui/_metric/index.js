@@ -5,7 +5,17 @@ import Component from './component'
 const labels = {
   headingTrue: {
     paths: ['navigation.headingTrue'],
-    label: 'Kompas',
+    label: 'Kompas (T)',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  headingMagnetic: {
+    paths: ['navigation.headingMagnetic'],
+    label: 'Kompas (M)',
     units: '',
     post: '°',
     convert: {
@@ -25,6 +35,12 @@ const labels = {
   },
   depthBelowTransducer: {
     paths: ['environment.depth.belowTransducer'],
+    label: 'Diepgang',
+    units: 'm',
+    post: ''
+  },
+  depthBelowKeel: {
+    paths: ['environment.depth.belowKeel'],
     label: 'Diepgang',
     units: 'm',
     post: ''
@@ -62,7 +78,128 @@ const labels = {
       from: 'k',
       to: 'c'
     }
+  },
+  outsideTemperature: {
+    paths: ['environment.outside.temperature'],
+    label: 'Buitentemperatuur',
+    units: '°C',
+    post: '',
+    convert: {
+      from: 'k',
+      to: 'c'
+    }
+  },
+  windDirectionTrue: {
+    paths: ['environment.wind.directionTrue'],
+    label: 'Windrichting (T)',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  windDirectionMagnetic: {
+    paths: ['environment.wind.directionMagnetic'],
+    label: 'Windrichting (M)',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  windAngleApparent: {
+    paths: ['environment.wind.angleApparent'],
+    label: 'Windhoek (A)',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  windSpeedApparent: {
+    paths: ['environment.wind.speedApparent'],
+    label: 'Windsnelheid (A)',
+    units: 'kts',
+    post: '',
+    convert: {
+      from: 'ms',
+      to: 'knots'
+    }
+  },
+  windAngleTrueGround: {
+    paths: ['environment.wind.angleTrueGround'],
+    label: 'Windhoek over grond (T)',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  windSpeedTrueGround: {
+    paths: ['environment.wind.speedOverGround'],
+    label: 'Windsnelheid over grond (T)',
+    units: 'kts',
+    post: '',
+    convert: {
+      from: 'ms',
+      to: 'knots'
+    }
+  },
+  windAngleTrueWater: {
+    paths: ['environment.wind.angleTrueWater'],
+    label: 'Windhoek (T)',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  windSpeedTrueWater: {
+    paths: ['environment.wind.speedTrue'],
+    label: 'Windsnelheid (T)',
+    units: 'kts',
+    post: '',
+    convert: {
+      from: 'ms',
+      to: 'knots'
+    }
+  },
+  roll: {
+    paths: ['navigation.attitude.roll'],
+    label: 'Yaw',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  pitch: {
+    paths: ['navigation.attitude.pitch'],
+    label: 'Yaw',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
+  },
+  yaw: {
+    paths: ['navigation.attitude.yaw'],
+    label: 'Yaw',
+    units: '',
+    post: '°',
+    convert: {
+      from: 'rad',
+      to: 'deg'
+    }
   }
+
 }
 
 function mapStateToProps (state, ownProps) {

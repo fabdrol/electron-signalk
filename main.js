@@ -21,8 +21,8 @@ const URI = 'http://localhost:15050'
 const PARAMS = {
   host: '192.168.0.100',
   port: '3000',
-  theme: 'light',
-  identity: 'center'
+  theme: 'dark',
+  identity: 'starboard'
 }
 
 try {

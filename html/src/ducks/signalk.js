@@ -27,7 +27,8 @@ export const CLEAR_STATE = 'industries.decipher.signalk/signalk/CLEAR_STATE'
 export const SET_SUN_TIMES = 'industries.decipher.signalk/signalk/SET_SUN_TIMES'
 
 export const defaultState = {
-  hostname: '95.97.138.90',
+  hostname: '192.168.0.100',
+  // hostname: '95.97.138.90',
   port: 3000,
   connected: false,
   shouldConnect: true,
@@ -36,14 +37,14 @@ export const defaultState = {
   servers: [
     {
       id: 1,
-      name: 'Decipher Industries',
-      hostname: '95.97.138.90',
+      name: 'X-Miles',
+      hostname: '192.168.0.100',
       port: 3000
     },
     {
       id: 2,
-      name: 'X-Miles',
-      hostname: '192.168.0.100',
+      name: 'Decipher Industries',
+      hostname: '95.97.138.90',
       port: 3000
     },
     {

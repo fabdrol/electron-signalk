@@ -20,9 +20,14 @@ export const defaultState = {
   theme: 'dark',
   night: false,
   shouldReset: false,
-  identity: 'center',
-  layout: null,
-  metrics: []
+  identity: 'starboard',
+  layout: 'quattro',
+  metrics: [
+    'speedOverGround',
+    'courseOverGround',
+    'depthBelowTransducer',
+    'position'
+  ]
 }
 
 export default function reducer (state = defaultState, action = {}) {
