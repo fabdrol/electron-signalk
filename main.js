@@ -22,7 +22,7 @@ const PARAMS = {
   host: '192.168.0.100',
   port: '3000',
   theme: 'dark',
-  identity: 'starboard'
+  identity: 'port'
 }
 
 try {

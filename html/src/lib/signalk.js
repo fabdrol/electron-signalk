@@ -9,7 +9,7 @@
  */
 
 import EventEmitter from 'eventemitter3'
-import Client from '@signalk/signalk-sdk'
+import Client from '@signalk/client'
 import fetch from 'cross-fetch'
 
 import {
